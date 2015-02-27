@@ -8,7 +8,6 @@
 var should = require('should');
 var cloneDeep = require('./');
 
-
 describe('cloneDeep()', function () {
   it('should clone a simple array', function () {
     cloneDeep(['alpha', 'beta', 'gamma']).should.eql(['alpha', 'beta', 'gamma']);
