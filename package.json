@@ -29,14 +29,14 @@
     "test": "mocha"
   },
   "dependencies": {
-    "for-own": "^0.1.1",
-    "is-plain-object": "^0.1.0",
-    "kind-of": "^0.1.0",
-    "mixin-object": "^0.1.1"
+    "for-own": "^0.1.3",
+    "is-plain-object": "^2.0.1",
+    "kind-of": "^2.0.0",
+    "mixin-object": "*"
   },
   "devDependencies": {
     "mocha": "*",
-    "should": "^4.0.4"
+    "should": "*"
   },
   "keywords": [
     "array",
