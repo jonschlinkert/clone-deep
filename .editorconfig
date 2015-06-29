@@ -12,6 +12,6 @@ insert_final_newline = true
 [*.md]
 trim_trailing_whitespace = false
 
-[test/fixtures/*]
+[test/**]
 insert_final_newline = false
 trim_trailing_whitespace = false
