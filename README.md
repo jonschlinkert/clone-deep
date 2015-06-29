@@ -1,22 +1,16 @@
-# clone-deep [![NPM version](https://badge.fury.io/js/clone-deep.svg)](http://badge.fury.io/js/clone-deep)  [![Build Status](https://travis-ci.org/jonschlinkert/clone-deep.svg)](https://travis-ci.org/jonschlinkert/clone-deep) 
+# clone-deep [![NPM version](https://badge.fury.io/js/clone-deep.svg)](http://badge.fury.io/js/clone-deep)  [![Build Status](https://travis-ci.org/jonschlinkert/clone-deep.svg)](https://travis-ci.org/jonschlinkert/clone-deep)
 
 > Recursively (deep) clone JavaScript native types, like Object, Array, RegExp, Date as well as primitives.
 
-The `instanceClone` function is invoked to clone objects that are not "plain" objects (as defined by [`isPlainObject`](#isPlainObject)) if it is provided. If `instanceClone` is not specified, it will not attempt to clone non-plain objects, and will copy the object reference.
+The `instanceClone` function is invoked to clone objects that are not "plain" objects (as defined by [](#isPlainObject)`isPlainObject`) if it is provided. If `instanceClone` is not specified, it will not attempt to clone non-plain objects, and will copy the object reference.
 
-## Install with [npm](npmjs.org)
+## Install
 
-```bash
-npm i clone-deep --save
+Install with [npm](https://www.npmjs.com/)
+
+```sh
+$ npm i clone-deep --save
 ```
-
-## Running tests
-Install dev dependencies.
-
-```bash
-npm i -d && npm test
-```
-
 
 ## Usage
 
@@ -24,48 +18,45 @@ npm i -d && npm test
 var cloneDeep = require('clone-deep');
 ```
 
-### Other javascript/node.js utils
+## Other object utils
 
-Other projects I maintain:
+* [assign-deep](https://github.com/jonschlinkert/assign-deep): Deeply assign the enumerable properties of source objects to a destination object.
+* [extend-shallow](https://github.com/jonschlinkert/extend-shallow): Extend an object with the properties of additional objects. node.js/javascript util.
+* [for-in](https://github.com/jonschlinkert/for-in): Iterate over the own and inherited enumerable properties of an objecte, and return an object… [more](https://github.com/jonschlinkert/for-in)
+* [for-own](https://github.com/jonschlinkert/for-own): Iterate over the own enumerable properties of an object, and return an object with properties… [more](https://github.com/jonschlinkert/for-own)
+* [is-plain-object](https://github.com/jonschlinkert/is-plain-object): Returns true if an object was created by the `Object` constructor.
+* [merge-deep](https://github.com/jonschlinkert/merge-deep): Recursively merge values in a javascript object.
+* [mixin-deep](https://github.com/jonschlinkert/mixin-deep): Deeply mix the properties of objects into the first object. Like merge-deep, but doesn't clone.
+* [mixin-object](https://github.com/jonschlinkert/mixin-object): Mixin the own and inherited properties of other objects onto the first object. Pass an… [more](https://github.com/jonschlinkert/mixin-object)
 
-  - [assemble](https://github.com/jonschlinkert/assemble)
-  - [verb](https://github.com/jonschlinkert/verb)
-  - [less.js](https://github.com/jonschlinkert/less.js)
-  - [handlebars-helpers](https://github.com/jonschlinkert/handlebars-helpers)
-  - [arr](https://github.com/jonschlinkert/arr)
-  - [arr-diff](https://github.com/jonschlinkert/arr-diff)
-  - [array-last](https://github.com/jonschlinkert/array-last)
-  - [array-slice](https://github.com/jonschlinkert/array-slice)
-  - [array-sum](https://github.com/jonschlinkert/array-sum)
-  - [arrayify-compact](https://github.com/jonschlinkert/arrayify-compact)
-  - [compact-object](https://github.com/jonschlinkert/compact-object)
-  - [delete](https://github.com/jonschlinkert/delete)
-  - [for-in](https://github.com/jonschlinkert/for-in)
-  - [for-own](https://github.com/jonschlinkert/for-own)
-  - [has-any](https://github.com/jonschlinkert/has-any)
-  - [has-value](https://github.com/jonschlinkert/has-value)
-  - [is-number](https://github.com/jonschlinkert/is-number)
-  - [is-plain-object](https://github.com/jonschlinkert/is-plain-object)
-  - [mixin-deep](https://github.com/jonschlinkert/mixin-deep)
-  - [mixin-object](https://github.com/jonschlinkert/mixin-object)
-  - [object-length](https://github.com/jonschlinkert/object-length)
-  - [omit-empty](https://github.com/jonschlinkert/omit-empty)
-  - [reduce-object](https://github.com/jonschlinkert/reduce-object)
+## Running tests
 
+Install dev dependencies:
+
+```sh
+$ npm i -d && npm test
+```
+
+## Contributing
+
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/jonschlinkert/clone-deep/issues/new)
 
 ## Author
 
 **Jon Schlinkert**
- 
+
 + [github/jonschlinkert](https://github.com/jonschlinkert)
-+ [twitter/jonschlinkert](http://twitter.com/jonschlinkert) 
++ [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
 
 Based on [mout's](https://github.com/mout/mout) implementation of deepClone.
 
 ## License
-Copyright (c) 2015 Jon Schlinkert  
-Released under the MIT license
+
+Copyright © 2014-2015 [Jon Schlinkert](https://github.com/jonschlinkert)
+Released under the MIT license.
 
 ***
 
-_This file was generated by [verb](https://github.com/assemble/verb) on February 26, 2015._
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on June 29, 2015._
+
+<!-- deps:helper-lookup-deps -->
