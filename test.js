@@ -5,6 +5,7 @@
  * Licensed under the MIT License.
  */
 
+/* deps: mocha */
 var should = require('should');
 var cloneDeep = require('./');
 
