@@ -6,8 +6,8 @@
 
 var typeOf = require('kind-of');
 var forOwn = require('for-own');
-var isPlainObject = require('is-plain-object');
-var mixin = require('mixin-object');
+var isObject = require('is-plain-object');
+var clone = require('shallow-clone');
 
 /**
  * Recursively clone native types.
@@ -25,7 +25,7 @@ function cloneDeep(val, instanceClone) {
 }
 
 function cloneObjectDeep(obj, instanceClone) {
-  if (isPlainObject(obj)) {
+  if (isObject(obj)) {
     var res = {};
     forOwn(obj, function (obj, key) {
       this[key] = cloneDeep(obj, instanceClone);
@@ -45,45 +45,6 @@ function cloneArrayDeep(arr, instanceClone) {
     res[i] = cloneDeep(arr[i], instanceClone);
   }
   return res;
-}
-
-function clone(val) {
-  switch (typeOf(val)) {
-    case 'object':
-      return cloneObject(val);
-    case 'array':
-      return cloneArray(val);
-    case 'regexp':
-      return cloneRegExp(val);
-    case 'date':
-      return cloneDate(val);
-    default:
-      return val;
-  }
-}
-
-function cloneObject(obj) {
-  if (isPlainObject(obj)) {
-    return mixin({}, obj);
-  } else {
-    return obj;
-  }
-}
-
-function cloneRegExp(re) {
-  var flags = '';
-  flags += re.multiline ? 'm' : '';
-  flags += re.global ? 'g' : '';
-  flags += re.ignorecase ? 'i' : '';
-  return new RegExp(re.source, flags);
-}
-
-function cloneDate(date) {
-  return new Date(+date);
-}
-
-function cloneArray(arr) {
-  return arr.slice();
 }
 
 /**
