@@ -4,30 +4,31 @@
  * Module dependenices
  */
 
-var typeOf = require('kind-of');
-var forOwn = require('for-own');
-var isObject = require('is-plain-object');
-var clone = require('shallow-clone');
+var lazy = require('lazy-cache')(require);
+lazy('is-plain-object', 'isObject');
+lazy('shallow-clone', 'clone');
+lazy('for-own', 'forOwn');
+lazy('kind-of', 'typeOf');
 
 /**
  * Recursively clone native types.
  */
 
 function cloneDeep(val, instanceClone) {
-  switch (typeOf(val)) {
+  switch (lazy.typeOf(val)) {
     case 'object':
       return cloneObjectDeep(val, instanceClone);
     case 'array':
       return cloneArrayDeep(val, instanceClone);
     default:
-      return clone(val);
+      return lazy.clone(val);
   }
 }
 
 function cloneObjectDeep(obj, instanceClone) {
-  if (isObject(obj)) {
+  if (lazy.isObject(obj)) {
     var res = {};
-    forOwn(obj, function (obj, key) {
+    lazy.forOwn(obj, function (obj, key) {
       this[key] = cloneDeep(obj, instanceClone);
     }, res);
     return res;
