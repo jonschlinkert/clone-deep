@@ -1,7 +1,7 @@
 {
   "name": "clone-deep",
   "description": "Recursively (deep) clone JavaScript native types, like Object, Array, RegExp, Date as well as primitives.",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "homepage": "https://github.com/jonschlinkert/clone-deep",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/clone-deep",
@@ -59,6 +59,9 @@
   "verb": {
     "related": {
       "list": []
-    }
+    },
+    "plugins": [
+      "gulp-format-md"
+    ]
   }
 }
