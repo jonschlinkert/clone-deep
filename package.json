@@ -10,8 +10,7 @@
   },
   "license": "MIT",
   "files": [
-    "index.js",
-    "utils.js"
+    "index.js"
   ],
   "main": "index.js",
   "engines": {
@@ -21,15 +20,14 @@
     "test": "mocha"
   },
   "dependencies": {
-    "for-own": "^0.1.3",
+    "for-own": "^1.0.0",
     "is-plain-object": "^2.0.1",
-    "kind-of": "^3.0.2",
-    "lazy-cache": "^1.0.3",
+    "kind-of": "^3.2.2",
     "shallow-clone": "^0.1.2"
   },
   "devDependencies": {
-    "mocha": "*",
-    "should": "*"
+    "gulp-format-md": "^0.1.12",
+    "mocha": "^3.4.1"
   },
   "keywords": [
     "array",
@@ -57,11 +55,16 @@
     "utility"
   ],
   "verb": {
-    "related": {
-      "list": []
-    },
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
     "plugins": [
       "gulp-format-md"
-    ]
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
