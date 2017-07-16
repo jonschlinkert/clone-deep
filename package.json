@@ -63,6 +63,14 @@
     "plugins": [
       "gulp-format-md"
     ],
+    "related": {
+      "list": [
+        "shallow-clone",
+        "kind-of",
+        "isobject",
+        "is-plain-object"
+      ]
+    },
     "lint": {
       "reflinks": true
     }
