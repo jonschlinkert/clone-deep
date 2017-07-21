@@ -14,6 +14,8 @@ var forOwn = require('for-own');
  */
 
 function cloneDeep(val, instanceClone) {
+  instanceClone = instanceClone || defaultInstanceClone;
+
   switch (typeOf(val)) {
     case 'object':
       return cloneObjectDeep(val, instanceClone);
@@ -48,8 +50,8 @@ function cloneArrayDeep(arr, instanceClone) {
   return res;
 }
 
-/**
- * Expose `cloneDeep`
- */
+function defaultInstanceClone(instance) {
+  return Object.create(Object.getPrototypeOf(instance), cloneDeep(Object.getOwnPropertyDescriptors(instance)));
+}
 
 module.exports = cloneDeep;
