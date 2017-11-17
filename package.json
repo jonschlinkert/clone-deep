@@ -22,12 +22,12 @@
   "dependencies": {
     "for-own": "^1.0.0",
     "is-plain-object": "^2.0.4",
-    "kind-of": "^5.0.0",
+    "kind-of": "^6.0.0",
     "shallow-clone": "^1.0.0"
   },
   "devDependencies": {
     "gulp-format-md": "^1.0.0",
-    "mocha": "^3.4.2"
+    "mocha": "3.5.2"
   },
   "keywords": [
     "array",
@@ -65,10 +65,10 @@
     ],
     "related": {
       "list": [
-        "shallow-clone",
-        "kind-of",
+        "is-plain-object",
         "isobject",
-        "is-plain-object"
+        "kind-of",
+        "shallow-clone"
       ]
     },
     "lint": {
