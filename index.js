@@ -32,17 +32,16 @@ function cloneObjectDeep(obj, instanceClone) {
       this[key] = cloneDeep(val, instanceClone);
     }, res);
     return res;
-  } else if (typeof instanceClone === 'function') {
-    return instanceClone(obj);
-  } else {
-    return obj;
   }
+  if (typeof instanceClone === 'function') {
+    return instanceClone(obj);
+  }
+  return obj;
 }
 
 function cloneArrayDeep(arr, instanceClone) {
-  var len = arr.length, res = [];
-  var i = -1;
-  while (++i < len) {
+  var res = [];
+  for (var i = 0; i < arr.length; i++) {
     res[i] = cloneDeep(arr[i], instanceClone);
   }
   return res;
