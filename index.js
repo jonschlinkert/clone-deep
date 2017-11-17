@@ -26,13 +26,13 @@ function cloneDeep(val, instanceClone) {
 }
 
 function cloneObjectDeep(obj, instanceClone) {
-  if (isObject(obj)) {
+  if (isObject(obj) || (instanceClone === true && typeOf(obj) === 'object')) {
     var res = {};
-    forOwn(obj, function(obj, key) {
-      this[key] = cloneDeep(obj, instanceClone);
+    forOwn(obj, function(val, key) {
+      this[key] = cloneDeep(val, instanceClone);
     }, res);
     return res;
-  } else if (instanceClone) {
+  } else if (typeof instanceClone === 'function') {
     return instanceClone(obj);
   } else {
     return obj;
