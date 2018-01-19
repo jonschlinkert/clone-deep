@@ -34,20 +34,6 @@ describe('cloneDeep()', function() {
     assert.notDeepEqual(arr1, arr2);
   });
 
-  it('should deep clone Map', function() {
-    var a = new Map([[1, 5]]);
-    var b = clone(a);
-    a.set(2, 4);
-    assert.notDeepEqual(Array.from(a), Array.from(b));
-  });
-
-  it('should deep clone Set', function() {
-    var a = new Set([2, 1, 3]);
-    var b = clone(a);
-    a.add(8);
-    assert.notDeepEqual(Array.from(a), Array.from(b));
-  });
-
   it('should return primitives', function() {
     assert.equal(clone(0), 0);
     assert.equal(clone('foo'), 'foo');
