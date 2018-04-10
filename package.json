@@ -20,10 +20,8 @@
     "test": "mocha"
   },
   "dependencies": {
-    "for-own": "^1.0.0",
-    "is-plain-object": "^2.0.4",
     "kind-of": "^6.0.2",
-    "shallow-clone": "^2.0.2"
+    "shallow-clone": "^3.0.0"
   },
   "devDependencies": {
     "gulp-format-md": "^1.0.0",
@@ -32,9 +30,12 @@
   "keywords": [
     "array",
     "assign",
+    "buffer",
+    "clamped",
     "clone",
     "clone-array",
     "clone-array-deep",
+    "clone-buffer",
     "clone-date",
     "clone-deep",
     "clone-object",
@@ -49,8 +50,7 @@
     "mixin-object",
     "object",
     "shallow",
-    "util",
-    "utility"
+    "symbol"
   ],
   "verb": {
     "toc": false,

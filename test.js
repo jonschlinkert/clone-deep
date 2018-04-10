@@ -1,49 +1,58 @@
 'use strict';
 
 require('mocha');
-var assert = require('assert');
-var clone = require('./');
+const assert = require('assert');
+const clone = require('./');
 
 describe('cloneDeep()', function() {
   it('should clone arrays', function() {
     assert.deepEqual(clone(['alpha', 'beta', 'gamma']), ['alpha', 'beta', 'gamma']);
     assert.deepEqual(clone([1, 2, 3]), [1, 2, 3]);
 
-    var a = [{ 'a': 0 }, { 'b': 1 }];
-    var b = clone(a);
+    const a = [{ 'a': 0 }, { 'b': 1 }];
+    const b = clone(a);
 
     assert.deepEqual(b, a);
     assert.deepEqual(b[0], a[0]);
 
-    var val = [0, 'a', {}, [{}], [function() {}], function() {}];
+    const val = [0, 'a', {}, [{}], [function() {}], function() {}];
     assert.deepEqual(clone(val), val);
   });
 
-  it('should deep clone object', function() {
-    var one = {a: 'b'};
-    var two = clone(one);
+  it('should deeply clone an array', function() {
+    const fixture = [[{a: 'b'}], [{a: 'b'}]];
+    const result = clone(fixture);
+    assert(fixture !== result);
+    assert(fixture[0] !== result[0]);
+    assert(fixture[1] !== result[1]);
+    assert.deepEqual(fixture, result);
+  });
+
+  it('should deeply clone object', function() {
+    const one = {a: 'b'};
+    const two = clone(one);
     two.c = 'd';
     assert.notDeepEqual(one, two);
   });
 
-  it('should deep clone arrays', function() {
-    var one = {a: 'b'};
-    var arr1 = [one];
-    var arr2 = clone(arr1);
+  it('should deeply clone arrays', function() {
+    const one = {a: 'b'};
+    const arr1 = [one];
+    const arr2 = clone(arr1);
     one.c = 'd';
     assert.notDeepEqual(arr1, arr2);
   });
 
-  it('should deep clone Map', function() {
-    var a = new Map([[1, 5]]);
-    var b = clone(a);
+  it('should deeply clone Map', function() {
+    const a = new Map([[1, 5]]);
+    const b = clone(a);
     a.set(2, 4);
     assert.notDeepEqual(Array.from(a), Array.from(b));
   });
 
-  it('should deep clone Set', function() {
-    var a = new Set([2, 1, 3]);
-    var b = clone(a);
+  it('should deeply clone Set', function() {
+    const a = new Set([2, 1, 3]);
+    const b = clone(a);
     a.add(8);
     assert.notDeepEqual(Array.from(a), Array.from(b));
   });
@@ -76,8 +85,8 @@ describe('cloneDeep()', function() {
       this.x = x;
     }
 
-    var a = new A({x: 11, y: 12, z: () => 'z'}, new B(2), 7);
-    var b = clone(a, true);
+    const a = new A({x: 11, y: 12, z: () => 'z'}, new B(2), 7);
+    const b = clone(a, true);
 
     assert.deepEqual(a, b);
 
