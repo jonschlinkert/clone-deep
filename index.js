@@ -14,9 +14,9 @@ function cloneDeep(val, instanceClone) {
 }
 
 function cloneCollection(val, instanceClone) {
-    const res = new val.constructor();
-    for (const key in val) res[key] = cloneDeep(val[key], instanceClone);
-    return res;
+  const res = new val.constructor();
+  for (const key in val) res[key] = cloneDeep(val[key], instanceClone);
+  return res;
 }
 
 /**
