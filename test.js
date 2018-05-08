@@ -96,4 +96,20 @@ describe('cloneDeep()', function() {
     assert.notEqual(a.z, b.z, 'Root property of original object not expected to be changed');
     assert.notEqual(a.y.x, b.y.x, 'Nested property of original object not expected to be changed');
   });
+
+  it('should deep clone functions', function () {
+    function fn () {
+      return 'hello world'
+    }
+
+    fn.foo = 'bar'
+
+    const target = { fn }
+    const copy = clone(target)
+
+    assert.deepStrictEqual(target, copy)
+    assert.deepStrictEqual(typeof copy.fn, 'function')
+    assert.deepStrictEqual(copy.fn.foo, 'bar')
+  })
+
 });
