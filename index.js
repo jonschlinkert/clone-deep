@@ -10,6 +10,7 @@ const typeOf = require('kind-of');
 function cloneDeep(val, instanceClone) {
   switch (typeOf(val)) {
     case 'object':
+    case 'regexp':
       return cloneObjectDeep(val, instanceClone);
     case 'array':
       return cloneArrayDeep(val, instanceClone);
