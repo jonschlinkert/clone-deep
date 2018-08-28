@@ -25,7 +25,7 @@ function cloneObjectDeep(val, instanceClone) {
   }
   if (typeOf(val) === 'object') {
     const res = new val.constructor();
-    for (const key in val) {
+    for (let key in val) {
       res[key] = cloneDeep(val[key], instanceClone);
     }
     return res;
