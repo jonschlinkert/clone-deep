@@ -74,7 +74,7 @@ describe('cloneDeep()', function() {
     assert.deepEqual(clone({a: {a: 1, b: 2, c: 3 }, b: {a: 1, b: 2, c: 3 }, c: {a: 1, b: 2, c: 3 } }), {a: {a: 1, b: 2, c: 3 }, b: {a: 1, b: 2, c: 3 }, c: {a: 1, b: 2, c: 3 } });
   });
 
-  it('should deep clone instances', function() {
+  it('should deep clone instances with instanceClone true', function() {
     function A(x, y, z) {
       this.x = x;
       this.y = y;
@@ -95,5 +95,61 @@ describe('cloneDeep()', function() {
     assert.notDeepEqual(a, b);
     assert.notEqual(a.z, b.z, 'Root property of original object not expected to be changed');
     assert.notEqual(a.y.x, b.y.x, 'Nested property of original object not expected to be changed');
+  });
+
+  it('should not deep clone instances', function() {
+    function A(x, y, z) {
+      this.x = x;
+      this.y = y;
+      this.z = z;
+    }
+
+    function B(x) {
+      this.x = x;
+    }
+
+    const a = new A({x: 11, y: 12, z: () => 'z'}, new B(2), 7);
+    const b = clone(a);
+
+    assert.deepEqual(a, b);
+
+    b.y.x = 1;
+    b.z = 2;
+    assert.deepEqual(a, b);
+    assert.equal(a.z, b.z);
+    assert.equal(a.y.x, b.y.x);
+  });
+
+  it('should deep clone instances with instanceClone self defined', function() {
+    function A(x, y, z) {
+      this.x = x;
+      this.y = y;
+      this.z = z;
+    }
+
+    function B(x) {
+      this.x = x;
+    }
+
+    const a = new A({x: 11, y: 12, z: () => 'z'}, new B(2), 7);
+    const b = clone(a, function(val){
+      if (val instanceof A) {
+        const res = new A();
+        for (const key in val) {
+          res[key] = clone(val[key]);
+        }
+        return res;
+      } else {
+        return clone(val);
+      }
+    });
+
+    assert.deepEqual(a, b);
+
+    b.y.x = 1;
+    b.z = 2;
+    assert.notDeepEqual(a, b);
+    assert.notEqual(a.z, b.z, 'Root property of original object not expected to be changed');
+    assert.equal(a.y.x, b.y.x);
   });
 });
