@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "is-plain-object": "^2.0.4",
-    "kind-of": "^6.0.2",
+    "kind-of": "^6.0.3",
     "shallow-clone": "^3.0.0"
   },
   "devDependencies": {
