@@ -48,8 +48,14 @@ function cloneObjectDeep (val, instanceClone) {
 
 function cloneArrayDeep (val, instanceClone) {
   const res = new val.constructor(val.length);
+  const circulars = (whatsCircular(val) ?? []).map(c => get(val, c));
+
   for (let i = 0; i < val.length; i++) {
-    res[i] = cloneDeep(val[i], instanceClone);
+    if (includes(circulars, val[i])) {
+      res[i] = clone(val[i]);
+    } else {
+      res[i] = cloneDeep(val[i], instanceClone);
+    }
   }
   return res;
 }
