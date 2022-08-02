@@ -1,6 +1,6 @@
 # clone-deep [![NPM version](https://img.shields.io/npm/v/clone-deep.svg?style=flat)](https://www.npmjs.com/package/clone-deep) [![NPM monthly downloads](https://img.shields.io/npm/dm/clone-deep.svg?style=flat)](https://npmjs.org/package/clone-deep) [![NPM total downloads](https://img.shields.io/npm/dt/clone-deep.svg?style=flat)](https://npmjs.org/package/clone-deep) [![Linux Build Status](https://img.shields.io/travis/jonschlinkert/clone-deep.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/clone-deep)
 
-> Recursively (deep) clone JavaScript native types, like Object, Array, RegExp, Date as well as primitives.
+> Recursively (deep) clone JavaScript native types, like Object, Array, RegExp, Date as well as primitives. Supports circular objects clonning.
 
 Please consider following this project's author, [Jon Schlinkert](https://github.com/jonschlinkert), and consider starring the project to show your :heart: and support.
 
@@ -19,6 +19,7 @@ const cloneDeep = require('clone-deep');
 
 let obj = { a: 'b' };
 let arr = [obj];
+
 let copy = cloneDeep(arr);
 obj.c = 'd';
 
@@ -27,6 +28,12 @@ console.log(copy);
 
 console.log(arr);
 //=> [{ a: 'b', c: 'd' }]
+
+obj.e = obj;
+copy = cloneDeep(arr);
+
+console.log(copy);
+//=> [{ a: 'b', c: 'd', e: {...} }] // handles circular arrays and objects cloning
 ```
 
 ## Heads up!
@@ -84,9 +91,10 @@ You might also be interested in these projects:
 ### Contributors
 
 | **Commits** | **Contributor** |  
-| --- | --- |  
+| -- | --- |  
 | 46 | [jonschlinkert](https://github.com/jonschlinkert) |  
-| 2  | [yujunlong2000](https://github.com/yujunlong2000) |  
+| 2 | [yujunlong2000](https://github.com/yujunlong2000) |  
+| 5  | [emahuni](https://github.com/emahuni) |  
 
 ### Author
 
