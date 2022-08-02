@@ -22,7 +22,10 @@
   "dependencies": {
     "is-plain-object": "^2.0.4",
     "kind-of": "^6.0.2",
-    "shallow-clone": "^3.0.0"
+    "lodash.get": "^4.4.2",
+    "lodash.includes": "^4.3.0",
+    "shallow-clone": "^3.0.0",
+    "whats-circular": "^2.0.2"
   },
   "devDependencies": {
     "gulp-format-md": "^2.0.0",
