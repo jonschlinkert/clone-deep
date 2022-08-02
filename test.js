@@ -43,6 +43,25 @@ describe('cloneDeep()', function() {
     assert.notDeepEqual(arr1, arr2);
   });
 
+  it('should deeply clone object with circular references', function() {
+    const one = {a: 'b'};
+    one.cyclic = one;
+    const two = clone(one);
+    two.c = 'd';
+    assert.notDeepEqual(one, two);
+    // assert.deepEqual(two, two.cyclic); // todo find out what to use here
+  });
+
+  it('should deeply clone arrays with circular references', function() {
+    const one = {a: 'b'};
+    const arr1 = [one];
+    arr1.push(arr1)
+    const arr2 = clone(arr1);
+    one.c = 'd';
+    assert.notDeepEqual(arr1, arr2);
+    // assert.equal(arr1, arr1[1]); todo find what to use here
+  });
+
   it('should deeply clone Map', function() {
     const a = new Map([[1, 5]]);
     const b = clone(a);
