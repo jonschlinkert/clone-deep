@@ -31,7 +31,7 @@ function cloneObjectDeep (val, instanceClone) {
   }
   if (instanceClone || isPlainObject(val)) {
     const res = new val.constructor();
-    const circulars = (whatsCircular(val) ?? []).map(c => get(val, c));
+    const circulars = (whatsCircular(val) || []).map(c => get(val, c));
 
     for (let key in val) {
       if (includes(circulars, val[key])) {
@@ -48,7 +48,7 @@ function cloneObjectDeep (val, instanceClone) {
 
 function cloneArrayDeep (val, instanceClone) {
   const res = new val.constructor(val.length);
-  const circulars = (whatsCircular(val) ?? []).map(c => get(val, c));
+  const circulars = (whatsCircular(val) || []).map(c => get(val, c));
 
   for (let i = 0; i < val.length; i++) {
     if (includes(circulars, val[i])) {
