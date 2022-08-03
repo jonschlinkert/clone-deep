@@ -43,7 +43,7 @@ function cloneObjectDeep (val, instanceClone, root, parentsRes, parentsVal) {
     return instanceClone(val);
   }
 
-  if (instanceClone || Array.isArray(val) || isPlainObject(val)) {
+  if (instanceClone || isArrayOrPlainObject(val)) {
     let res;
     if (root) {
       res = root; // don't directly use root to avoid confusion
@@ -54,11 +54,14 @@ function cloneObjectDeep (val, instanceClone, root, parentsRes, parentsVal) {
     // if root is undefined then this was just a clone object constructor
     if (root) {
       for (let key in val) {
-        let circularIndex = findIndex(parentsVal, v => isEqual(v, val[key]));
-        if (~circularIndex) {
+        const isValObj = isArrayOrPlainObject(val[key]);
+        let circularIndex;
+        if (isValObj) circularIndex = findIndex(parentsVal, v => isEqual(v, val[key]));
+
+        if (circularIndex !== undefined && ~circularIndex) {
           res[key] = parentsRes[circularIndex];
         } else {
-          if (Array.isArray(val[key]) || isPlainObject(val[key]) || typeof instanceClone === typeof val[key]) {
+          if (isValObj || typeof instanceClone === typeof val[key]) {
             // this is some kind of object
             parentsVal.push(val[key]);
 
@@ -80,6 +83,11 @@ function cloneObjectDeep (val, instanceClone, root, parentsRes, parentsVal) {
   }
 
   return val;
+}
+
+
+function isArrayOrPlainObject (val) {
+  return Array.isArray(val) || isPlainObject(val);
 }
 
 
