@@ -8,6 +8,7 @@ const clone = require('shallow-clone');
 const typeOf = require('kind-of');
 const isPlainObject = require('is-plain-object');
 const findIndex = require('lodash.findindex');
+const isEqual = require('lodash.isequal');
 
 
 function cloneDeep (val, instanceClone) {
@@ -17,7 +18,7 @@ function cloneDeep (val, instanceClone) {
 
   // don't repeat if these will result same as parentsRes[0]
   if (/array|object/.test(typeOf(val))) {
-    if (!/function|undefined/.test(typeof instanceClone) || isPlainObject(val)) {
+    if (!/function|undefined/.test(typeof instanceClone) || typeof val === 'object') {
       return _cloneDeep(val, instanceClone, parentsRes[0], parentsRes, [val]);
     }
   }
@@ -38,7 +39,7 @@ function _cloneDeep (val, instanceClone, root, parentsRes, parentsVal) {
 
 
 function cloneObjectDeep (val, instanceClone, root, parentsRes, parentsVal) {
-  if (typeof instanceClone === 'function' && !Array.isArray(val)) {
+  if (typeof instanceClone === 'function') {
     return instanceClone(val);
   }
 
@@ -53,7 +54,7 @@ function cloneObjectDeep (val, instanceClone, root, parentsRes, parentsVal) {
     // if root is undefined then this was just a clone object constructor
     if (root) {
       for (let key in val) {
-        let circularIndex = findIndex(parentsVal, val[key]);
+        let circularIndex = findIndex(parentsVal, v => isEqual(v, val[key]));
         if (~circularIndex) {
           res[key] = parentsRes[circularIndex];
         } else {
