@@ -7,37 +7,29 @@
 const clone = require('shallow-clone');
 const typeOf = require('kind-of');
 const isPlainObject = require('is-plain-object');
-const whatsCircular = require('whats-circular');
-const includes = require('lodash.includes');
-const find = require('lodash.find');
-const get = require('lodash.get');
-const set = require('lodash.set');
+const findIndex = require('lodash.findindex');
 
 
 function cloneDeep (val, instanceClone) {
-  const circularsPaths = whatsCircular(val);
-  const circulars = circularsPaths !== undefined ?
-    circularsPaths.map(c => ({ val: get(val, c), path: c, parentPath: undefined })) :
-    undefined;
+  // get an instance of the main val into parentsRes first, we need this for checking and setting of clone circular references
+  // undefined root will skip cloning in cloneObjectDeep and just get the new instance
+  const parentsRes = [_cloneDeep(val, instanceClone)];
 
-  let cloned = _cloneDeep(val, instanceClone, circulars, circularsPaths, []);
-
-  if (Array.isArray(circulars)) {
-    circulars.forEach((c) => {
-      const pointer = get(cloned, c.parentPath);
-      set(cloned, c.path, pointer);
-    });
+  // don't repeat if these will result same as parentsRes[0]
+  if (/array|object/.test(typeOf(val))) {
+    if (!/function|undefined/.test(typeof instanceClone) || isPlainObject(val)) {
+      return _cloneDeep(val, instanceClone, parentsRes[0], parentsRes, [val]);
+    }
   }
-
-  return cloned;
+  return parentsRes[0];
 }
 
 
-function _cloneDeep (val, instanceClone, circulars, circularsPaths, parentPath) {
+function _cloneDeep (val, instanceClone, root, parentsRes, parentsVal) {
   switch (typeOf(val)) {
     case 'array':
     case 'object':
-      return cloneObjectDeep(val, instanceClone, circulars, circularsPaths, parentPath);
+      return cloneObjectDeep(val, instanceClone, root, parentsRes, parentsVal);
     default: {
       return clone(val);
     }
@@ -45,26 +37,41 @@ function _cloneDeep (val, instanceClone, circulars, circularsPaths, parentPath) 
 }
 
 
-function cloneObjectDeep (val, instanceClone, circulars, circularsPaths, parentPath) {
+function cloneObjectDeep (val, instanceClone, root, parentsRes, parentsVal) {
   if (typeof instanceClone === 'function' && !Array.isArray(val)) {
     return instanceClone(val);
   }
 
   if (instanceClone || Array.isArray(val) || isPlainObject(val)) {
-    const res = new val.constructor(Array.isArray(val) ? val.length : undefined);
+    let res;
+    if (root) {
+      res = root; // don't directly use root to avoid confusion
+    } else {
+      res = new val.constructor(Array.isArray(val) ? val.length : undefined);
+    }
 
-    for (let key in val) {
-      const keyPath = parentPath.concat([key]);
-      // check if value of val[key] is in circulars (is this not a parent of a circular) and ensure we didn't already assign a parent path to it?
-      let circ, goDeeper = true;
-      if ((circ = find(circulars, (c) => !c.parentPath && c.val === val[key], 0))) {
-        circ.parentPath = keyPath;
-      } else if ((circ = find(circulars, { path: keyPath }, 0))) {
-        goDeeper = false;
-      }
+    // if root is undefined then this was just a clone object constructor
+    if (root) {
+      for (let key in val) {
+        let circularIndex = findIndex(parentsVal, val[key]);
+        if (~circularIndex) {
+          res[key] = parentsRes[circularIndex];
+        } else {
+          if (Array.isArray(val[key]) || isPlainObject(val[key]) || typeof instanceClone === typeof val[key]) {
+            // this is some kind of object
+            parentsVal.push(val[key]);
 
-      if (goDeeper) {
-        res[key] = _cloneDeep(val[key], instanceClone, circulars, circularsPaths, keyPath);
+            const keyRoot = _cloneDeep(val[key], instanceClone); // get instance for object at val[key]
+            res[key] = keyRoot;
+            parentsRes.push(keyRoot);
+
+            // the following will clone val[key] object on keyRoot/res[key]
+            _cloneDeep(val[key], instanceClone, keyRoot, parentsRes, parentsVal);
+          } else {
+            // this is a scalar property
+            res[key] = _cloneDeep(val[key], instanceClone, res, parentsRes, parentsVal);
+          }
+        }
       }
     }
 

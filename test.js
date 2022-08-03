@@ -43,7 +43,7 @@ describe('cloneDeep()', function () {
     assert.notDeepEqual(arr1, arr2);
   });
 
-  it('should deeply clone object with circular references', function () {
+  it('should deeply clone object with circular references if pointing to root object', function () {
     const one = { a: false, b: { c: '3' } };
     one.b.cyclic = one.b;
     const two = clone(one);
@@ -53,7 +53,7 @@ describe('cloneDeep()', function () {
     assert.notEqual(one.b.cyclic.c, two.b.cyclic.c);
   });
 
-  it.skip('should deeply clone object with circular references', function () {
+  it('should deeply clone object with circular references if pointing to inner object', function () {
     const one = { a: false, b: { c: '3' } };
     one.b.cyclic = one;
     const two = clone(one);

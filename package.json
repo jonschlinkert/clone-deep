@@ -22,14 +22,9 @@
   "dependencies": {
     "is-plain-object": "^2.0.4",
     "kind-of": "^6.0.2",
-    "lodash.find": "^4.6.0",
     "lodash.findindex": "^4.6.0",
-    "lodash.get": "^4.4.2",
-    "lodash.includes": "^4.3.0",
     "lodash.isequal": "^4.5.0",
-    "lodash.set": "^4.3.2",
-    "shallow-clone": "^3.0.0",
-    "whats-circular": "^2.0.2"
+    "shallow-clone": "^3.0.0"
   },
   "devDependencies": {
     "gulp-format-md": "^2.0.0",
