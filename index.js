@@ -6,7 +6,7 @@
 
 const clone = require('shallow-clone');
 const typeOf = require('kind-of');
-const isPlainObject = require('is-plain-object');
+const { isPlainObject } = require('is-plain-object');
 
 function cloneDeep(val, instanceClone) {
   switch (typeOf(val)) {
@@ -25,7 +25,7 @@ function cloneObjectDeep(val, instanceClone) {
     return instanceClone(val);
   }
   if (instanceClone || isPlainObject(val)) {
-    const res = new val.constructor();
+    const res = (val.constructor !== undefined) ? new val.constructor() : Object.create(null);
     for (let key in val) {
       res[key] = cloneDeep(val[key], instanceClone);
     }

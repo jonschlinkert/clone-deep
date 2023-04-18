@@ -35,6 +35,14 @@ describe('cloneDeep()', function() {
     assert.notDeepEqual(one, two);
   });
 
+  it('should deeply clone object without constructor', function() {
+    const one = Object.create(null);
+    one.a = 'b';
+    const two = clone(one);
+    two.c = 'd';
+    assert.notDeepEqual(one, two);
+  });
+
   it('should deeply clone arrays', function() {
     const one = {a: 'b'};
     const arr1 = [one];
