@@ -1,4 +1,4 @@
-# clone-deep [![NPM version](https://img.shields.io/npm/v/clone-deep.svg?style=flat)](https://www.npmjs.com/package/clone-deep) [![NPM monthly downloads](https://img.shields.io/npm/dm/clone-deep.svg?style=flat)](https://npmjs.org/package/clone-deep) [![NPM total downloads](https://img.shields.io/npm/dt/clone-deep.svg?style=flat)](https://npmjs.org/package/clone-deep) [![Linux Build Status](https://img.shields.io/travis/jonschlinkert/clone-deep.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/clone-deep)
+# clone-deep [![NPM version](https://img.shields.io/npm/v/clone-deep.svg?style=flat)](https://www.npmjs.com/package/clone-deep) [![NPM monthly downloads](https://img.shields.io/npm/dm/clone-deep.svg?style=flat)](https://npmjs.org/package/clone-deep) [![NPM total downloads](https://img.shields.io/npm/dt/clone-deep.svg?style=flat)](https://npmjs.org/package/clone-deep) [![Linux Build Status](https://img.shields.io/travis/jonschlinkert/clone-deep.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/clone-deep) 
 
 > Recursively (deep) clone JavaScript native types, like Object, Array, RegExp, Date as well as primitives.
 
@@ -14,6 +14,12 @@ $ npm install --save clone-deep
 ## Sponsors
 
 The following companies, organizations, and individuals support the ongoing maintenance and development of clone-deep. [Become a Sponsor](https://github.com/sponsors/jonschlinkert) to add your logo to this README, or any of [my other projects](https://github.com/jonschlinkert?tab=repositories&q=&type=&language=&sort=stargazers)
+
+### Gold Sponsors
+
+| [<img src="https://github.com/jonschlinkert/clone-deep/assets/383994/98036489-2cae-48a2-8d29-7dec58ea05c4" alt="https://jaake.tech/" width="100"/>](https://jaake.tech/) |
+|:---:|
+| [https://jaake.tech/](https://jaake.tech/) |
 
 ## Usage
 
@@ -76,18 +82,18 @@ $ npm install -g verbose/verb#dev verb-generate-readme && verb
 
 ### Related projects
 
-You might also be interested in these projects:
+You might also be interested in these projects: 
 
 - [is-plain-object](https://www.npmjs.com/package/is-plain-object): Returns true if an object was created by the `Object` constructor, or Object.create(null). | [homepage](https://github.com/jonschlinkert/is-plain-object "Returns true if an object was created by the `Object` constructor, or Object.create(null).")
 - [isobject](https://www.npmjs.com/package/isobject): Returns true if the value is an object and not an array or null. | [homepage](https://github.com/jonschlinkert/isobject "Returns true if the value is an object and not an array or null.")
 - [kind-of](https://www.npmjs.com/package/kind-of): Get the native type of a value. | [homepage](https://github.com/jonschlinkert/kind-of "Get the native type of a value.")
-- [shallow-clone](https://www.npmjs.com/package/shallow-clone): Creates a shallow clone of any JavaScript value. | [homepage](https://github.com/jonschlinkert/shallow-clone "Creates a shallow clone of any JavaScript value.")
+- [shallow-clone](https://www.npmjs.com/package/shallow-clone): Creates a shallow clone of any JavaScript value. | [homepage](https://github.com/jonschlinkert/shallow-clone "Creates a shallow clone of any JavaScript value.")  
 
 ### Contributors
-| **Commits** | **Contributor** |
-| --- | --- |
-| 48 | [jonschlinkert](https://github.com/jonschlinkert) |
-| 2  | [yujunlong2000](https://github.com/yujunlong2000) |
+| **Commits** | **Contributor** |  
+| --- | --- |  
+| 49 | [jonschlinkert](https://github.com/jonschlinkert) |  
+| 2  | [yujunlong2000](https://github.com/yujunlong2000) |  
 
 ### Author
 **Jon Schlinkert**
